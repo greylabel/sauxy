@@ -1,6 +1,6 @@
 #Automated Cross-browser Testing with Sauce Labs
 
-Starter-kit and code examples for an automated cross-browser testing workflow for Drupal using Behat tests supported by Github and Jenkins or Travis CI for continuous integration. 
+Starter-kit and code examples for an automated cross-browser testing workflow for Drupal using Behat tests supported by Github and Jenkins or Travis CI for continuous integration.
 
 [Fork the Sauxy repo](https://github.com/greylabel/sauxy/fork) and clone locally to begin working with these code examples.
 
@@ -9,6 +9,8 @@ Starter-kit and code examples for an automated cross-browser testing workflow fo
 Sauce Labs is a SaaS platform that provides Selenium testing, JavaScript Unit testing, manual testing, and mobile application testing.
 
 Sauce Labs make cross-browser testing easier and faster for developers by providing access to numerous virtual machines at a very low cost. They support a wide-range of browsers and mobile devices, and provide integration services allowing for robust automated cross-browser testing workflows.
+
+Official [Sauce Labs Documentation](https://docs.saucelabs.com/)
 
 ### Setup
 
@@ -87,7 +89,7 @@ A web driver replacement that uses Chrome instead of Firefox
 `drush make sauxy.make docroot && cd docroot`
 
 #### Install Drupal
-_Replace PLACEHOLDERS below with desired configuration_
+Replace _PLACEHOLDERS_ below with desired configuration.
 
 `cd docroot`
 
@@ -102,17 +104,17 @@ Run Composer to download and install all the Behat extension and dependencies de
 
 `composer install`
 
-Make a copy of `behat.local.yml.example` for your own settings and name it`behat.local.yml`.
+Make a copy of `behat.local.yml.example` for your own settings and name it `behat.local.yml`.
 
 Open this new `behat.local.yml` config file and fill in your local site information according to the comments. This file tells Behat how to connect to your local site.
 
 Test if Behat is working
 `bin/behat -dl`
 
-Run this included sample feature. 
-`bin/behat features/drupal.feature`
+Run this included sample feature.
+`bin/behat features/install.feature`
 
-This test should pass on a fresh Drupal site. If not, you can still confirm Behat is working if you get a failed test. 
+This test should pass on a fresh Drupal site. If not, you can still confirm Behat is working if you get a failed test.
 
 This test should also confirm that Selenium is working correctly.
 
@@ -120,11 +122,68 @@ This test should also confirm that Selenium is working correctly.
 
 Using a terminal, go to: `/{path-to-project-root}/tests/behat`
 
-`bin/sauce_config YOUR-SAUCE-USERNAME YOUR-SAUCE-API-KEY`
+`bin/sauce_config SAUCE-USERNAME SAUCE-ACCESS-KEY`
 
 Sauce connect: secure tunnel between project infrastructure and Sauce Labs infrastructure.
 
 `bin/sauce_connect`
 
-Run this included sample feature. 
-`bin/behat features/drupal.feature`
+Make a copy of `sauce.local.yml.example` for your own settings and name it `sauce.local.yml`.
+
+Open this new `sauce.local.yml` config file and fill in your local site information according to the comments.
+
+Using the Behat [Environment Variable](http://docs.behat.org/guides/7.config.html#environment-variable) as alternative to local .yml files.
+
+Run this included sample feature.
+`bin/behat -c sauce.yml -p IE-9 features/install.feature`
+
+Visit your Sauce Labs [test page](https://saucelabs.com/tests) to see the status of this test, including screenshots and video.
+
+## Jenkins
+
+*****
+#### WORK IN PROGRESS
+*****
+
+### CloudBees
+
+1. [Login](https://grandcentral.cloudbees.com/login) to existing CloudBees account or create a [new account](https://www.cloudbees.com/signup)
+2. Enable Jenkins as a Subscribed Service (link)
+3. Enable Sauce Labs as a Subscribed Service (link). This will create a Sauce Labs account. You can skip this step if you already have a Sauce Labs account.
+
+### Jenkins
+
+1. Manage Jenkins -> Configure System. You should see Sauce On Demand credentials. These are needed when running tests for Jenkins to connect to Sauce Labs.
+2. Manage Jenkins -> Manage Plugins. Enable the _HTML Publisher plugin_.
+3. [GitHub Jenkins Plugin](http://blog.cloudbees.com/2012/01/better-integration-between-jenkins-and.html)
+
+####Jenkins Jobs
+
+1. Create new job as a _Build a free-style software project_.
+1. Specify Git repository as under _Source Code Management_. Add details for git repo
+1. Add a build step and select _Invoke Ant_ from _Build_ and specify [REPALCE] target.
+1. Specify HTML report path. (You need to have HTML report plugin installed on Jenkins)
+
+
+
+## Travis CI
+
+*****
+#### WORK IN PROGRESS
+*****
+
+[Travis CI Documentation](http://docs.travis-ci.com/)
+[Using Sauce Labs with Travis CI](http://docs.travis-ci.com/user/sauce-connect/)
+
+### Setup
+
+1. Sign up for a [Travis CI account](https://travis-ci.org) visit.
+
+### Install Travis ruby gem
+
+`gem install travis`
+
+#### Activate GitHub Webhook
+
+1. http://docs.travis-ci.com/user/getting-started/#Step-two%3A-Activate-GitHub-Webhook
+2.

@@ -1,6 +1,6 @@
 Feature: Drupal Installation
 In order to use Drupal
-As a Drupal
+As a site administrator
 I need to see that Drupal is installed correctly
 @javascript
 Scenario: Installation Finished

@@ -1,0 +1,45 @@
+# sauce.yml
+default:
+  extensions:
+    Behat\MinkExtension\Extension:
+      default_session: 'selenium2'
+
+IE-9:
+  extensions:
+    Behat\MinkExtension\Extension:
+      selenium2:
+        browser: iexplore
+        # wd_host: SAUCE-USERNAME:SAUCE-API-KEY@ondemand.saucelabs.com/wd/hub
+        capabilities: { platform: Windows 2008, browser: iexplore, version: 9}
+
+Firefox-19:
+  extensions:
+    Behat\MinkExtension\Extension:
+      selenium2:
+        browser: firefox
+        # wd_host: SAUCE-USERNAME:SAUCE-API-KEY@ondemand.saucelabs.com/wd/hub
+        capabilities: { platform: Linux, version: 19}
+
+iPhone:
+  extensions:
+    Behat\MinkExtension\Extension:
+      selenium2:
+        browser: iphone
+        # wd_host: SAUCE-USERNAME:SAUCE-API-KEY@ondemand.saucelabs.com/wd/hub
+        capabilities: { platform:Mac 10.,version: 6}
+
+iPad:
+  extensions:
+    Behat\MinkExtension\Extension:
+      selenium2:
+        browser: iPad
+        # wd_host: SAUCE-USERNAME:SAUCE-API-KEY@ondemand.saucelabs.com/wd/hub
+        capabilities: { platform: Mac 10.8,version: 6}
+
+Android:
+  extensions:
+    Behat\MinkExtension\Extension:
+      selenium2:
+        browser: android
+        # wd_host: SAUCE-USERNAME:SAUCE-API-KEY@ondemand.saucelabs.com/wd/hub
+        capabilities: { platform:Linux,version:4}

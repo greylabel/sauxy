@@ -26,5 +26,29 @@ install:
   - cd ../../
 
 before_script:
+  # Install Mininal Profile
+  - drush make --prepare-install sauxy.make docroot --yes
+  - cd docroot
+  - sudo chmod -R 777 sites/all/
+  - sudo chmod -R 777 sites/default/files/
+  - drush si minimal --sites-subdir=default --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=password --site-mail=admin@example.com --site-name="Sauxy" --yes
+  - drush cc all --yes
+  - cd ../
+
+  # Setup display for selenium
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - sleep 5s
+
+  # Run the drush built in webserver.
+  - sudo chmod u+x /home/travis/.phpenv/shims/drush
+  - sudo ln -s /home/travis/.phpenv/shims/drush /usr/bin/drush
+  - sudo drush --root=$PWD/docroot runserver --server=builtin 80 &
+  - sleep 5s # give Web server some time to bind to sockets, etc
 
 script:
+  - cd tests/behat
+
+  # Set env variable for behat params.
+  # - export BEHAT_PARAMS="extensions[Behat\MinkExtension\Extension][selenium2][wd_host]=$SAUCE_USERNAME:$SAUCE_ACCESS_KEY@ondemand.saucelabs.com/wd/hub"
+

@@ -1,7 +1,7 @@
 language: php
 
 php:
-  - 5.4
+  - 5.3
 
 mysql:
   database: drupal
@@ -12,8 +12,7 @@ before_install:
   - sudo apt-get update > /dev/null
 
 install:
-
-  # install php packages
+  # Install php packages
   - sudo apt-get install -y --force-yes php5-cgi php5-mysql
 
   # Install Drush
@@ -21,3 +20,11 @@ install:
   - pear install drush/drush
   - phpenv rehash
 
+  # Run composer
+  - cd ./tests/behat
+  - composer install
+  - cd ../../
+
+before_script:
+
+script:

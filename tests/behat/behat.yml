@@ -1,0 +1,19 @@
+# behat.yml
+default:
+  context:
+    class: 'FeatureContext'
+  paths:
+    features: 'features'
+    bootstrap: 'features/bootstrap'
+  extensions:
+    Behat\MinkExtension\Extension:
+      goutte: ~
+      selenium2: ~
+      default_session: goutte
+      javascript_session: selenium2
+    Drupal\DrupalExtension\Extension:
+      blackbox: ~
+      drush: ~
+
+imports:
+  - behat.local.yml

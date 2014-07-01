@@ -1,0 +1,32 @@
+<project name="behat" basedir=".">
+
+   <target name="sauce">
+    <delete dir="${basedir}/reports" />
+      <mkdir dir="${basedir}/reports"/>
+      <parallel>
+        <sequential>
+              <antcall target="iPhone"></antcall>
+              <antcall target="iPad"></antcall>
+              <antcall target="android"></antcall>
+        </sequential>
+     </parallel>
+  </target>
+  <target name="iPhone">
+    <echo message="Running Behat Tests on iPhone with SauceLabs"/>
+    <exec dir="${basedir}" executable="php" failonerror="true">
+    <arg line= "bin/behat -c sauce.yml -p iPhone -f html --out reports/report.html"/>
+    </exec>
+  </target>
+  <target name="iPad">
+    <echo message="Running Behat Tests on iPad with SauceLabs"/>
+    <exec dir="${basedir}" executable="php" failonerror="true">
+    <arg line= "bin/behat -c sauce.yml -p iPad -f html --out reports/report.html"/>
+    </exec>
+  </target>
+  <target name="android">
+    <echo message="Running Behat Tests on Android with SauceLabs"/>
+    <exec dir="${basedir}" executable="php" failonerror="true">
+    <arg line= "bin/behat -c sauce.yml -p Android -f html --out reports/report.html"/>
+    </exec>
+  </target>
+</project>

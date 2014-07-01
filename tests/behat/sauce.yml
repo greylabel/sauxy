@@ -43,3 +43,6 @@ Android:
         browser: android
         # wd_host: SAUCE-USERNAME:SAUCE-API-KEY@ondemand.saucelabs.com/wd/hub
         capabilities: { platform:Linux,version:4}
+
+imports:
+  - sauce.local.yml

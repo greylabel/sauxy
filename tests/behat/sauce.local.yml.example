@@ -1,0 +1,9 @@
+# sauce.yml
+default:
+  extensions:
+    Behat\MinkExtension\Extension:
+      base_url: 'http://localhost'
+      default_session: 'selenium2'
+      selenium2:
+        wd_host: SAUCE-USERNAME:SAUCE-ACCESS-KEY@ondemand.saucelabs.com/wd/hub
+

@@ -7,3 +7,17 @@ mysql:
   database: drupal
   username: root
   encoding: utf8
+
+before_install:
+  - sudo apt-get update > /dev/null
+
+install:
+
+  # install php packages
+  - sudo apt-get install -y --force-yes php5-cgi php5-mysql
+
+  # Install Drush
+  - pear channel-discover pear.drush.org
+  - pear install drush/drush
+  - phpenv rehash
+
